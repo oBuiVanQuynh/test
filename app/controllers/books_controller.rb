@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :correct_user,   only: :destroy
   def index
   	@books =  Book.paginate_by_sql ["select a.id, a.user_id, a.name,a.created_at,
-     a.content from books a, users b where a.user_id = b.id and b.status='f' and b.id != ?",current_user.id], :page => params[:page], :per_page => 10
+     a.content from books a, users b where a.user_id = b.id and (b.status='f' or b.id = ?)",current_user.id], :page => params[:page], :per_page => 3
   end
 
   def create
