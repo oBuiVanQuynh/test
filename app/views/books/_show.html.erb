@@ -1,0 +1,24 @@
+<li>
+  <span class="content">
+  <div>	Book name: </div>
+<div>
+  <%= @book.name %>
+</div>
+  </span>
+  <span class="content">
+  	<div>
+  	Book  description:
+  	</div>
+  	<div>
+  	 <%= @book.content %>
+  	</div>
+  </span>
+    Created by <%= @book.user.name %> <%= time_ago_in_words(@book.created_at) %> ago.
+  </span>
+  <% if current_user?(@book.user) %>
+    <%= link_to "delete", @book, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: @book.name %>
+   | <%=link_to "edit", edit_book_path(@book)%>
+  <% end %>
+</li>

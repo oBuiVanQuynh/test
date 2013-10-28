@@ -1,0 +1,12 @@
+<li>
+  <span class="content"><%= link_to book.name, book %></span>
+  <span class="timestamp">
+    Created by <%= book.user.name %> <%= time_ago_in_words(book.created_at) %> ago.
+  </span>
+  <% if current_user?(book.user) %>
+    <%= link_to "delete", book, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: book.name %>
+    | <%= link_to "edit", edit_book_path(book) %>
+  <% end %>
+</li>

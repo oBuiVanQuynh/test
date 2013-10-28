@@ -8,6 +8,12 @@ module SessionsHelper
    def current_user=(user)
     @current_user = user
   end
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
   def signed_in?
     !current_user.nil?
   end
